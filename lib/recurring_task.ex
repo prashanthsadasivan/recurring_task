@@ -16,10 +16,14 @@ defmodule RecurringTask.GenServer do
         def task(state) do
           # do whatever it is that needs to happen
           # and return the new state
+          SomeApi.poll(state.user_id)
         end
       end
 
-  There's a few extra bits of functionality baked in, but it is a small but useful wrapper around GenServer.
+  There's a few extra bits of functionality baked in, but that's it! `task` will be called every 200ms.
+
+  In order to start the Recurring task, you can rig it up via a supervisor using a worker (it's a normal Genserver). It can
+  be started with an initial state as well
 
   """
 
