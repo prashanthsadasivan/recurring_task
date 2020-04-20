@@ -1,6 +1,6 @@
 defmodule RecurringTask.GenServerTest do
   use ExUnit.Case
-  doctest RecurringTask
+  doctest RecurringTask.GenServer
 
   defmodule RecurringTaskTest.ModuleAttributeExample do
     use RecurringTask.GenServer

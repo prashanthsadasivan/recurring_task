@@ -44,17 +44,21 @@ defmodule RecurringTask.GenServer do
   @callback task(any()) :: any()
 
   @optional_callbacks recur_period: 1
-  defmacro __using__(opts) do
+  defmacro __using__(_opts) do
     task_module = __CALLER__.module
 
     quote do
       use GenServer
-      @behaviour RecurringTask
+      @behaviour RecurringTask.GenServer
 
-      @before_compile RecurringTask
+      @before_compile RecurringTask.GenServer
 
       def start_link(state) do
         GenServer.start_link(__MODULE__, state)
+      end
+
+      def start_link(state, opts) do
+        GenServer.start_link(__MODULE__, state, opts)
       end
 
       def init(state) do
